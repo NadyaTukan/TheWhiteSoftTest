@@ -21,7 +21,7 @@ for rep in replacementSet:
     if rep['source'] == None:
         #удаление всех вставленых сообщений
         data = [i for i in data if i != rep['replacement']]
-
+    
     for message in data:
         #если перестановка найдена в сообщении
         if message.find(rep['replacement']) != -1:
