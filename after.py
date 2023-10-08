@@ -33,15 +33,17 @@ def cleaning_from_replacements(replacements, data):
         else:
             for message in clean_data:
                 if message.find(replacement['replacement']) != -1:
-                    clean_data.insert(clean_data.index(message), message.replace(replacement['replacement'],
-                                                                                 replacement['source']))
+                    index = clean_data.index(message)
+                    clean_data.insert(index, message.replace(replacement['replacement'],
+                                                             replacement['source']))
                     clean_data.remove(message)
     return clean_data
 
 
 if __name__ == "__main__":
     data = get_data("https://raw.githubusercontent.com/thewhitesoft/student-2023-assignment/main/data.json")
-    replacements = cleaning_replacements_from_repetitions(get_replacements("./Data/replacement.json"))
+    replacements = get_replacements("./Data/replacement.json")
+    replacements_without_repetitions = cleaning_replacements_from_repetitions(replacements)
     clean_data = cleaning_from_replacements(replacements, data)
     writing_results(clean_data, "./Data/result.json")
 
